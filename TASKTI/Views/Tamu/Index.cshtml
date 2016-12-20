@@ -1,0 +1,80 @@
+﻿@model IEnumerable<TASKTI.Models.Tamu>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="text-align:center;font-weight:bold;font-family:'Amber Shaie';font-size:45px;color:silver">Guest Book</h2>
+<br />
+
+
+<style>
+    th {
+        text-align: center;
+        background-color: steelblue;
+        color:silver;
+    }
+    td {
+        color:silver;
+    }
+</style>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nama_Tamu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alamat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ucapan_Selamat)
+        </th>
+       <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nama_Tamu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alamat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ucapan_Selamat)
+        </td>
+        @*<td style="text-align:center">
+            @if (item.username == User.Identity.GetUserName())
+            {
+               
+            }
+            @Html.ActionLink("Ubah", "Edit", new { id = item.Id_Tamu }, new { @class = "btn btn-warning" }) |
+            @Html.ActionLink("Hapus", "Hapus", new { id = item.Id_Tamu }, new { @class = "btn btn-danger" })
+          
+        </td>*@
+        <td>
+            @if (item.email == User.Identity.GetUserName())
+                {
+                <a href="~/Tamu/Delete/@item.Id_Tamu" class="btn btn-danger">Delete</a>
+                <a href="~/Tamu/Edit/@item.Id_Tamu" class="btn btn-warning">Edit</a>
+            }
+            @*else
+            {
+                <a href="~/Tamu/Edit/@item.Id_Tamu" class="btn btn-warning">Edit</a>
+            }*@
+        </td>
+    </tr>
+}
+
+</table>
+<div class="container" style="text-align:center">
+    @Html.ActionLink("New Guest", "Create", "Tamu", new { @class = "btn btn-success" })
+
+</div>
+
